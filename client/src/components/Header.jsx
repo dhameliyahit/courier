@@ -9,6 +9,8 @@ const Header = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const suggestionsRef = useRef(null);
 
+    const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
     const handleCenter = () => {
         if (center.trim() === "") {
             alert("Please enter a valid center, pincode, state, or branch name.");
@@ -21,7 +23,7 @@ const Header = () => {
 
     const fetchAllCenters = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/centers');
+            const response = await axios.get(`${backendURL}/api/centers`);
             const centerNames = response.data.map(center => center.name);
             setCenters(centerNames);
         } catch (error) {

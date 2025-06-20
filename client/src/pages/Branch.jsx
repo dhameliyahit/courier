@@ -6,12 +6,14 @@ const Branch = () => {
   const { name: center } = useParams();
   const [centerData, setCenterData] = useState(null);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
   const fetchCenterDetail = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/centers/${center}`);
+      const response = await fetch(`${backendURL}/api/centers/${center}`);
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
-
+alert(backendURL)
       if (data.centers && data.centers.length > 0) {
         setCenterData(data.centers[0]);
       } else {
